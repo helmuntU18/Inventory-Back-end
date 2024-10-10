@@ -67,11 +67,11 @@ public class MercanciaController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteMercancia(@PathVariable Long id) {
+    public ResponseEntity<HttpStatus> deleteMercancia(@PathVariable Long id, @PathVariable String nombreUsario) {
         if (service.findById(id).isEmpty()) {
             throw new EntityNotFoundException("la mercancia que intentas eliminar, no existe vuelva a intentarlo o comuniquese con soporte");
         }
-        service.deleteById(id);
+        service.deleteById(id,nombreUsario);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     @InitBinder

@@ -32,7 +32,7 @@ public class MercanciaServiceImpl implements MercanciaService{
     public void update(Mercancia mercancia) {
         String usuarioRegistrado = mercancia.getUsuario().getNombre();
 
-        if (!usuarioRegistrado.equals(mercancia.getUsuario_modificacion())) {
+        if (!usuarioRegistrado.equals(mercancia.getUsuario_modificacion().getNombre())) {
             throw new IllegalArgumentException("No tienes permiso para modificar esta mercancía.");
         }
 
@@ -43,14 +43,14 @@ public class MercanciaServiceImpl implements MercanciaService{
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Long id, String usuarioModificacion) {
         Optional<Mercancia> MercanciaById = repository.findById(id);
 
         if (MercanciaById.isPresent()) {
             Mercancia mercancia = MercanciaById.get();
             String usuarioRegistrado = mercancia.getUsuario().getNombre();
 
-            if (!mercancia.getUsuario().getNombre().equals(usuarioRegistrado)) {
+            if (!usuarioModificacion.equals(usuarioRegistrado)) {
                 throw new IllegalArgumentException("No tienes permiso para eliminar esta mercancía.");
             }
 

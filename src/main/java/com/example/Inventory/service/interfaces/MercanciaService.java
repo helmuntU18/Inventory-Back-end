@@ -9,6 +9,6 @@ public interface MercanciaService {
     List<Mercancia> findAll();
     Optional<Mercancia> findById(Long Id);
     void update(Mercancia inventory);
-    void deleteById(Long id);
+    void deleteById(Long id, String mercancia);
     void save (Mercancia inventory);
 }
